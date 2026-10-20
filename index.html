@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f4ef">
+  <title>EMYPESH | Portafolio creativo</title>
+
+  <style>
+    :root {
+      --fondo: #f7f4ef;
+      --texto: #22211f;
+      --acento: #c6a5e8;
+      --suave: #e8e0f0;
+      --blanco: #ffffff;
+      --borde: #e4ded6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    button, a {
+      font: inherit;
+    }
+
+    .barra {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 6%;
+      background: var(--fondo);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-decoration: none;
+      color: var(--texto);
+      white-space: nowrap;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .menu button {
+      background: transparent;
+      color: var(--texto);
+      border: 1px solid transparent;
+      padding: 10px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .menu button:hover,
+    .menu button.activo {
+      background: var(--acento);
+      border-color: var(--acento);
+    }
+
+    main {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 60px 6% 90px;
+      min-height: 75vh;
+    }
+
+    .seccion {
+      display: none;
+      animation: aparecer 0.35s ease;
+    }
+
+    .seccion.activa {
+      display: block;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .etiqueta {
+      display: inline-block;
+      padding: 8px 13px;
+      margin-bottom: 22px;
+      border-radius: 30px;
+      background: var(--suave);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      margin-bottom: 28px;
+      max-width: 900px;
+    }
+
+    h1 span {
+      color: #9871c1;
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      line-height: 1.8;
+      color: #625e59;
+    }
+
+    .introduccion {
+      max-width: 660px;
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+    }
+
+    .boton {
+      display: inline-block;
+      background: var(--texto);
+      color: var(--blanco);
+      padding: 14px 22px;
+      border: 0;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .boton:hover {
+      background: #51475d;
+    }
+
+    .destacado {
+      margin-top: 55px;
+      padding: 35px;
+      border-radius: 24px;
+      background: var(--suave);
+    }
+
+    .rejilla {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 35px;
+    }
+
+    .proyecto {
+      min-width: 0;
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .marco-imagen {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #eee8f3;
+      color: #756b7c;
+    }
+
+    .marco-imagen img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .marco-imagen img.oculta {
+      display: none;
+    }
+
+    .marco-imagen .vacio {
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .info-proyecto {
+      padding: 20px;
+    }
+
+    .info-proyecto p {
+      font-size: 0.95rem;
+    }
+
+    .aviso {
+      margin-top: 30px;
+      padding: 18px 20px;
+      background: #fffaf0;
+      border: 1px solid #e9dfc9;
+      border-radius: 14px;
+      font-size: 0.9rem;
+    }
+
+    .sobre-mi {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .bloque-lateral {
+      padding: 28px;
+      background: var(--suave);
+      border-radius: 24px;
+    }
+
+    .bloque-lateral p + p {
+      margin-top: 15px;
+    }
+
+    .pie {
+      padding: 25px 6%;
+      border-top: 1px solid var(--borde);
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 700px) {
+      .barra {
+        position: relative;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 5%;
+      }
+
+      .menu {
+        justify-content: flex-start;
+        width: 100%;
+        gap: 5px;
+      }
+
+      .menu button {
+        padding: 9px 11px;
+        font-size: 0.82rem;
+      }
+
+      main {
+        padding: 45px 5% 65px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .rejilla,
+      .sobre-mi {
+        grid-template-columns: 1fr;
+      }
+
+      .destacado {
+        padding: 25px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="barra">
+    <a class="logo" href="#inicio" aria-label="Inicio EMYPESH">EMY<span>PESH</span></a>
+
+    <nav class="menu" aria-label="Menú principal">
+      <button type="button" data-seccion="inicio" class="activo" aria-current="page">Inicio</button>
+      <button type="button" data-seccion="sobre-mi">Quién soy</button>
+      <button type="button" data-seccion="grafico">Diseño gráfico</button>
+      <button type="button" data-seccion="uxui">UI/UX</button>
+      <button type="button" data-seccion="audiovisual">Audiovisual</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="seccion activa">
+      <span class="etiqueta">Portafolio creativo</span>
+      <h1>Ideas que se convierten en <span>experiencias.</span></h1>
+      <p class="introduccion">
+        Soy una creativa apasionada por el diseño, las interfaces
+        y la producción audiovisual. Explora mi trabajo y conoce
+        mi forma de transformar ideas en proyectos visuales.
+      </p>
+      <button class="boton" type="button" data-ir="sobre-mi">
+        Conóceme →
+      </button>
+
+      <div class="destacado">
+        <h2>Mi universo creativo</h2>
+        <p>
+          Diseño gráfico, UI/UX y producción audiovisual:
+          tres formas de comunicar, experimentar y crear.
+        </p>
+      </div>
+    </section>
+
+    <section id="sobre-mi" class="seccion">
+      <span class="etiqueta">Un poco sobre mí</span>
+      <div class="sobre-mi">
+        <div>
+          <h2>Hola, soy Emily.</h2>
+          <p class="introduccion">
+            Este es mi espacio creativo, donde comparto quién soy,
+            lo que me inspira y los proyectos que construyo.
+          </p>
+          <p>
+            Aquí podremos incluir tu presentación personal,
+            formación, intereses, habilidades y objetivos.
+          </p>
+        </div>
+        <aside class="bloque-lateral">
+          <h3>Mi enfoque</h3>
+          <p>Creatividad y comunicación visual.</p>
+          <p>Diseño de experiencias digitales.</p>
+          <p>Narrativas y contenido audiovisual.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="grafico" class="seccion">
+      <span class="etiqueta">01 / Portafolio</span>
+      <h2>Diseño gráfico</h2>
+      <p class="introduccion">
+        Identidad visual, composición, color y exploración gráfica.
+      </p>
+
+      <div class="rejilla">
+        <article class="proyecto">
+          <div class="marco-imagen">
+            <div class="vacio">Imagen del proyecto 01</div>
+          </div>
+          <div class="info-proyecto">
+            <h3>Proyecto de diseño 01</h3>
+            <p>Identidad visual y exploración gráfica.</p>
+          </div>
+        </article>
+
+        <article class="proyecto">
+          <div class="marco-imagen">
+            <div class="vacio">Imagen del proyecto 02</div>
+          </div>
+          <div class="info-proyecto">
+            <h3>Proyecto de diseño 02</h3>
+            <p>Composición, color y comunicación visual.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="uxui" class="seccion">
+      <span class="etiqueta">02 / Portafolio</span>
+      <h2>UI/UX</h2>
+      <p class="introduccion">
+        Interfaces, prototipos y experiencias digitales pensadas
+        para las personas.
+      </p>
+
+      <div class="rejilla">
+        <article class="proyecto">
+          <div class="marco-imagen">
+            <div class="vacio">Imagen del proyecto UI/UX 01</div>
+          </div>
+          <div class="info-proyecto">
+            <h3>Proyecto de interfaz 01</h3>
+            <p>Diseño de interfaz y sistema visual.</p>
+          </div>
+        </article>
+
+        <article class="proyecto">
+          <div class="marco-imagen">
+            <div class="vacio">Imagen del proyecto UI/UX 02</div>
+          </div>
+          <div class="info-proyecto">
+            <h3>Proyecto de interfaz 02</h3>
+            <p>Prototipado y experiencia de usuario.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="audiovisual" class="seccion">
+      <span class="etiqueta">03 / Portafolio</span>
+      <h2>Producción audiovisual</h2>
+      <p class="introduccion">
+        Historias contadas a través de imágenes, movimiento,
+        sonido y edición.
+      </p>
+
+      <div class="rejilla">
+        <article class="proyecto">
+          <div class="marco-imagen">
+            <div class="vacio">Portada audiovisual 01</div>
+          </div>
+          <div class="info-proyecto">
+            <h3>Proyecto audiovisual 01</h3>
+            <p>Fotografía, narrativa o producción.</p>
+          </div>
+        </article>
+
+        <article class="proyecto">
+          <div class="marco-imagen">
+            <div class="vacio">Portada audiovisual 02</div>
+          </div>
+          <div class="info-proyecto">
+            <h3>Proyecto audiovisual 02</h3>
+            <p>Edición y comunicación audiovisual.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>EMYPESH · Portafolio creativo</p>
+  </footer>
+
+  <script>
+    const secciones = document.querySelectorAll(".seccion");
+    const botonesMenu = document.querySelectorAll("[data-seccion]");
+
+    function mostrarSeccion(id) {
+      const destino = document.getElementById(id);
+
+      if (!destino) return;
+
+      secciones.forEach((seccion) => {
+        seccion.classList.toggle("activa", seccion.id === id);
+      });
+
+      botonesMenu.forEach((boton) => {
+        const seleccionado = boton.dataset.seccion === id;
+
+        boton.classList.toggle("activo", seleccionado);
+
+        if (seleccionado) {
+          boton.setAttribute("aria-current", "page");
+        } else {
+          boton.removeAttribute("aria-current");
+        }
+      });
+
+      if (window.location.hash !== "#" + id) {
+        history.replaceState(null, "", "#" + id);
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    botonesMenu.forEach((boton) => {
+      boton.addEventListener("click", () => {
+        mostrarSeccion(boton.dataset.seccion);
+      });
+    });
+
+    document.querySelectorAll("[data-ir]").forEach((boton) => {
+      boton.addEventListener("click", () => {
+        mostrarSeccion(boton.dataset.ir);
+      });
+    });
+
+    const seccionInicial = window.location.hash.slice(1);
+
+    if (seccionInicial && document.getElementById(seccionInicial)) {
+      mostrarSeccion(seccionInicial);
+    }
+  </script>
+</body>
+</html>
