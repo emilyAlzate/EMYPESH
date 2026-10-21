@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,8 +27,6 @@
       color: #ffffff;
       font-family: Arial, Helvetica, sans-serif;
     }
-
-    /* MENÚ */
 
     header {
       width: 100%;
@@ -71,8 +68,6 @@
       outline-offset: 4px;
     }
 
-    /* CONTENIDO Y SCROLL */
-
     main {
       width: 100%;
       min-height: calc(100vh - 90px);
@@ -89,8 +84,6 @@
     .seccion.activa {
       display: block;
     }
-
-    /* IMÁGENES GRANDES */
 
     .imagen-contenedor {
       display: flex;
@@ -110,4 +103,119 @@
       object-fit: contain;
     }
 
-    /* DI
+    @media (max-width: 600px) {
+      header {
+        padding: 22px 12px;
+      }
+
+      nav {
+        gap: 8px;
+      }
+
+      nav button {
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        padding: 10px 13px;
+      }
+
+      main {
+        padding: 18px 12px 50px;
+      }
+
+      .imagen-contenedor img {
+        width: 100%;
+        max-width: 100%;
+        max-height: none;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav aria-label="Menú principal">
+      <button
+        type="button"
+        class="activo"
+        data-seccion="sobre-mi">
+        QUIÉN SOY
+      </button>
+
+      <button
+        type="button"
+        data-seccion="grafico">
+        DISEÑO GRÁFICO
+      </button>
+
+      <button
+        type="button"
+        data-seccion="uxui">
+        UX/UI
+      </button>
+
+      <button
+        type="button"
+        data-seccion="audiovisual">
+        AUDIOVISUAL
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- QUIÉN SOY: IMAGEN UNO -->
+    <section id="sobre-mi" class="seccion activa">
+      <div class="imagen-contenedor">
+        <img
+          src="imagen%20uno.jpg"
+          alt="Quién soy">
+      </div>
+    </section>
+
+    <!-- DISEÑO GRÁFICO: IMAGEN TRES -->
+    <section id="grafico" class="seccion">
+      <div class="imagen-contenedor">
+        <img
+          src="imagen%20tres.jpg"
+          alt="Diseño gráfico">
+      </div>
+    </section>
+
+    <!-- UX/UI: IMAGEN DOS -->
+    <section id="uxui" class="seccion">
+      <div class="imagen-contenedor">
+        <img
+          src="imagen%20dos.jpg"
+          alt="Diseño UX/UI">
+      </div>
+    </section>
+
+    <!-- AUDIOVISUAL: IMAGEN CUATRO -->
+    <section id="audiovisual" class="seccion">
+      <div class="imagen-contenedor">
+        <img
+          src="imagen%20cuatro.jpg"
+          alt="Audiovisual">
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const botones = document.querySelectorAll("nav button");
+    const secciones = document.querySelectorAll(".seccion");
+
+    botones.forEach((boton) => {
+      boton.addEventListener("click", () => {
+        const destino = boton.dataset.seccion;
+
+        secciones.forEach((seccion) => {
+          seccion.classList.toggle(
+            "activa",
+            seccion.id === destino
+          );
+        });
+
+        botones
